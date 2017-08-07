@@ -15,6 +15,8 @@ class Product (models.Model) :
 
 @python_2_unicode_compatible
 class Location (models.Model) :
+	id = models.AutoField(primary_key=True)
+
 	datetime = models.DateTimeField()
 	latitude = models.DecimalField(max_digits=9, decimal_places=7)
 	longitude= models.DecimalField(max_digits=9, decimal_places=7)
