@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 
+
 @python_2_unicode_compatible
 class Product (models.Model) :
 	description = models.CharField(max_length=200)
@@ -25,5 +26,6 @@ class Location (models.Model) :
 	last_modified= models.DateTimeField(auto_now = True)
 
 	def __str__(self) :
-		return self.product + " " + self.latitude + " " + self.longitude + " " + self.elevation
+		return str(self.latitude) + " | " + str(self.longitude) + " | " \
+			+ str(self.elevation) + " @ " + str(self.datetime)
 
