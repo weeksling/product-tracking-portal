@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux';
-import * as actionTypes from '../actions/types';
+import * as types from '../actions/ActionTypes';
 
 
 const products = (state=null, action) => {
 	switch (action.type) {
-		case actionTypes.SET_PRODUCTS:
+		case types.SET_PRODUCTS:
 			return action.data;
-		case actionTypes.SET_SELECTED_PRODUCT:
+		case types.SET_SELECTED_PRODUCT:
 			return action.data;
 		default:
 			return state;
