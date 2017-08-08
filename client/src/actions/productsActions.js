@@ -5,9 +5,10 @@ import axios from 'axios'
 export function fetchProducts (data) {
 	return dispatch => {
 		dispatch(productsRequest())
-		return axios.get('http://localhost:3000/api/products')
+		return axios.get('/api/products')
 			.then(function (response) {
-				dispatch(productsSuccess(data))
+				console.log(response.data)
+				dispatch(productsSuccess(response.data))
 			})
 	}
 }
@@ -18,15 +19,9 @@ function productsRequest() {
 	}
 }
 
-function productsSuccess() {
+function productsSuccess(data) {
 	return {
-		type: types.FETCH_PRODUCTS_SUCCESS
-	}
-}
-
-export function setSelectedProduct (data) {
-	return {
-		type: types.SET_SELECTED_PRODUCT,
-		data: data
+		type: types.FETCH_PRODUCTS_SUCCESS,
+		payload: data
 	}
 }
