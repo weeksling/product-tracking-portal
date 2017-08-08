@@ -1,21 +1,10 @@
 import { combineReducers } from 'redux';
-import * as types from '../actions/ActionTypes';
 
-
-const products = (state=null, action) => {
-	switch (action.type) {
-		case types.SET_PRODUCTS:
-			return action.data;
-		case types.SET_SELECTED_PRODUCT:
-			return action.data;
-		default:
-			return state;
-	}
-}
+import productsReducer from './productsReducer';
 
 
 const appReducer = combineReducers({
-	products
+	products: productsReducer
 })
 
 const rootReducer = (state, action) => {

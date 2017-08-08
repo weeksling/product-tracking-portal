@@ -7,7 +7,7 @@ export function fetchProducts (data) {
 		dispatch(productsRequest())
 		return axios.get('http://localhost:3000/api/products')
 			.then(function (response) {
-
+				dispatch(productsSuccess(data))
 			})
 	}
 }
