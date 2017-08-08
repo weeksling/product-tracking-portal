@@ -1,11 +1,11 @@
-#Product Tracking Portal (React, Redux, and Django REST API)
+# Product Tracking Portal (React, Redux, and Django REST API)
 This project is a simple product tracking system to allow users to record package locations and times.
 
-##Requirements
+## Requirements
   - Python 2.7
   - Node 4.6.1
 
-##Getting Started
+## Getting Started
 
 ### Setting up the Django server
 First, pull the repository to your local machine
