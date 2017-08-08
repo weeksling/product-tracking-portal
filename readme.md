@@ -52,6 +52,8 @@ python manage.py runserver
 
 This will start a development server at localhost:8000/
 
+You can observe the API at localhost:8000/api
+
 
 
 
