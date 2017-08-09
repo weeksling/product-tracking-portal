@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 
-import ProductListView from './containers/ProductListContainer'
 import store from './store'
 
 import { Provider } from 'react-redux';
