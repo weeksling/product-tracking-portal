@@ -23,8 +23,5 @@
   "devDependencies": {
     "nock": "^9.0.14",
     "redux-mock-store": "^1.2.3"
-  },
-  "jest": {
-    "testEnvironment": "node"
   }
 }
