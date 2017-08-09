@@ -56,4 +56,23 @@ You can observe the API at localhost:8000/api
 
 
 
+### Starting the NodeJS server
 
+**Currently the servers are only configured for development mode. I will update these to work in prodction soon.**
+
+To start the NodeJS server and view the React app, simply run the following from the project's root folder:
+
+```
+cd client
+npm run start
+```
+
+To run the automated test suite, run:
+
+```
+npm run test
+```
+
+The application will load in development mode, and the react app will be available at the localhost:8000/
+
+**Note** You will need to run this server in a separate terminal instance from the Django API in order to properly consume the API.
