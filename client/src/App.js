@@ -4,7 +4,7 @@ import store from './store'
 
 import { Provider } from 'react-redux';
 
-import ProductList from "./ProductList";
+import {ProductList, ProductAdd} from "./Products";
 
 import './App.css';
 
@@ -15,7 +15,10 @@ class App extends Component {
       <div>
         <h2>Product List</h2>
         <Provider store={store}>
-          <ProductList />
+          <div>
+            <ProductList />
+            <ProductAdd />
+          </div>
         </Provider>
       </div>
     );

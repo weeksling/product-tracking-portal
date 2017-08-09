@@ -1,7 +1,7 @@
 import React from 'react';
 import { mount, shallow } from 'enzyme';
 
-import ProductList, { Product } from '../ProductList';
+import { ProductList, Product } from '../ProductList';
 
 describe('ProductList', () => {
 

@@ -9,7 +9,7 @@ const store = createStore(
   rootReducer,
   compose(
     applyMiddleware(
-      //createLogger(),
+      createLogger(),
       thunk,
       promiseMiddleware()
     )
