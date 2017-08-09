@@ -5,7 +5,7 @@ import axios from 'axios'
 export function fetchProducts (data) {
 	return dispatch => {
 		dispatch(productsRequest())
-		return axios.get('/api/products')
+		return axios.get('http://localhost:8000/api/products/')
 			.then(function (response) {
 				console.log(response.data)
 				dispatch(productsSuccess(response.data))

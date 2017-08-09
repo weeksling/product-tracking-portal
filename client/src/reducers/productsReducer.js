@@ -4,7 +4,7 @@ import * as types from '../actions/ActionTypes'
 const initialState = {
 	loading: false,
 	error: null,
-	products: null
+	products: []
 }
 
 export default (state = initialState, action ) =>{

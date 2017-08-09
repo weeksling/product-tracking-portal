@@ -6,43 +6,9 @@ import ReactTable from 'react-table';
 
 import { connect } from 'react-redux';
 
+import ProductList from './ProductList';
 
-const ProductList = React.createClass({
-	render() {
-		let {
-			products
-		} = this.props;
-
-		const columns = [
-			{
-				Header: 'id',
-				accessor: 'id' 
-			}, {
-				Header: 'description',
-				accessor: 'description'
-			},
-			{
-		  		Header: 'track',
-				Cell: props => <span className='number'><button>View Details</button></span> 
-		  	}
-		]
-
-		if (!products) {
-			return (
-				<p>No data</p>
-			)
-		}
-		return (
-			<div>
-				<ReactTable 
-					data = {products}
-					columns = {columns}/>
-			</div>
-		)
-	}
-})
-
-class ProductListContainer extends Component {
+export class ProductListContainer extends Component {
 	componentDidMount() {
 		this.props.dispatch(fetchProducts())
 	}

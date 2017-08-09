@@ -6,7 +6,7 @@ import { createStore } from 'redux';
 const initialState = {
 	loading: false,
 	error: null,
-	products: null
+	products: []
 };
 
 

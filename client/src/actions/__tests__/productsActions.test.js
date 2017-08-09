@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import promises from 'redux-promise-middleware';
@@ -22,8 +26,8 @@ describe( 'productsActions', () => {
 		})
 
 		it ('succeeds, dispatches a FETCH_PRODUCTS_REQUEST and FETCH_PRODUCTS_SUCCESS', () => {
-			let request = nock('http://localhost')
-				.get('/api/products')
+			let request = nock('http://localhost:8000')
+				.get('/api/products/')
 				.reply(200,  
 					[
 						{"product_id":1,"description":"Cesna 120"},
