@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 
+import { Link } from 'react-router-dom';
 
 import { connect } from 'react-redux';
 
@@ -19,6 +20,7 @@ export class Product extends Component {
 				<td>{product.product_id}</td>
 				<td>{product.description}</td>
 				<td><button onClick={ e => { this.props.selectToEdit(product) } }>edit</button></td>
+				<td><button><Link to={"/locations/"+product.product_id}>Track Locations</Link></button></td>
 			</tr>
 		)
 	}
