@@ -23,7 +23,10 @@ export default class ProductForm extends Component {
 	componentWillReceiveProps (nextProps) {
 		console.log({nextProps})
 		if (nextProps.existingProduct) {
-			this.setState({formValue: nextProps.existingProduct})
+			this.setState({ formValue: nextProps.existingProduct })
+		} 
+		else if (this.props.existingProduct) {
+			this.setState({ formValue: null })
 		}
 	}
 
@@ -36,7 +39,6 @@ export default class ProductForm extends Component {
 	}
 
 	handleChange (formValue) {
-		console.log('UPDATE', formValue)
 		this.setState({formValue})
 	}
 
