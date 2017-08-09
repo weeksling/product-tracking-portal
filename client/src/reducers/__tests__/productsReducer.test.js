@@ -6,6 +6,7 @@ import { createStore } from 'redux';
 const initialState = {
 	loading: false,
 	error: null,
+	productToEdit: null,
 	products: []
 };
 

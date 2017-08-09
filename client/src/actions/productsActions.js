@@ -15,13 +15,33 @@ export function fetchProducts (data) {
 
 export function createProduct (product) {
 	return dispatch => {
-		dispatch( { type: types.CREATE_PRODUCT } )
-		dispatch( createProductRequest() )
+		dispatch( { type: types.CREATE_PRODUCT, payload: product } )
+		dispatch( createProductRequest(product) )
 		return axios.post('http://localhost:8000/api/products/', product)
 			.then( (response) => {
 				dispatch( createProductSuccess(response.data) )
-				return dispatch(fetchProducts())
+				return dispatch( fetchProducts() )
 			})
+	}
+}
+
+export function updateProduct (product) {
+	return dispatch => {
+		dispatch( { type: types.UPDATE_PRODUCT, payload:product })
+		dispatch( { type: types.UPDATE_PRODUCT_REQUEST })
+		return axios.put('http://localhost:8000/api/products/' + product.product_id + '/', product)
+			.then( () => {
+				dispatch( { type: types.UPDATE_PRODUCT_SUCCESS })
+				return dispatch( fetchProducts() )
+			})
+
+	}
+}
+
+export function selectProductToEdit (product) {
+	return {
+		type: types.SELECT_PRODUCT_TO_EDIT,
+		payload: product
 	}
 }
 

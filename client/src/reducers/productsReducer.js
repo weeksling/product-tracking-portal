@@ -4,6 +4,7 @@ import * as types from '../actions/ActionTypes'
 const initialState = {
 	loading: false,
 	error: null,
+	productToEdit: null,
 	products: []
 }
 
@@ -20,6 +21,18 @@ export default (state = initialState, action ) =>{
 				loading:false,
 				products: action.payload
 			};
+
+		case types.SELECT_PRODUCT_TO_EDIT:
+			return {
+				...state,
+				productToEdit: action.payload
+			}
+
+		case types.UPDATE_PRODUCT_SUCCESS:
+			return {
+				...state,
+				productToEdit: null
+			}
 		default:
 			return state;
 	}
