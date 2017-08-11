@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 
-import store from './store'
+import { Provider } from 'react-redux';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import ProductsView from './Views/ProductsView';
+import LocationsView from './Views/LocationsView';
 
-import { Provider } from 'react-redux';
+import store from './store'
 
-
-import './App.css';
 
 class App extends Component {
 
@@ -20,8 +19,7 @@ class App extends Component {
         <Provider store={store}>
           <Router>
             <div>
-              <Route exact path="/" component={ProductsView}/>
-              <Route patch="/locations/:id" component={ProductsView}/>
+              <Route exact path="/" component={LocationsView}/>
             </div>
           </Router>
         </Provider>

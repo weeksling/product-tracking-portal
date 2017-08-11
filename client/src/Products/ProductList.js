@@ -12,14 +12,15 @@ const Loading = () => <p>Loading...</p>
 export class Product extends Component {
 	render() {
 		let {
-			product
+			product,
+			selectToEdit
 		} = this.props;
 
 		return (
 			<tr>
 				<td>{product.product_id}</td>
 				<td>{product.description}</td>
-				<td><button onClick={ e => { this.props.selectToEdit(product) } }>edit</button></td>
+				<td><button onClick={ e => { selectToEdit(product) } }>edit</button></td>
 				<td><button><Link to={"/locations/"+product.product_id}>Track Locations</Link></button></td>
 			</tr>
 		)
@@ -40,6 +41,10 @@ export class ProductList extends Component {
 		return (
 			<div>
 				<table>
+					<thead>
+						<th>Id</th>
+						<th>Description</th>
+					</thead>
 					<tbody>
 					{products.map( (product, index) =>{
 						return <Product product={product} key={index} selectToEdit={this.props.selectToEdit} />
