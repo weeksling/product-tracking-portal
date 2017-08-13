@@ -1,60 +1,93 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import {LocationList, LocationAdd, LocationEdit} from "../Locations";
+import { LocationList, LocationAdd, LocationEdit } from "../Locations";
 
-const DEMO_LOCATIONS = [
-    {
-        "id": 1,
-        "product": {
-            "product_id": 1,
-            "description": "Cesna 122"
-        },
-        "longitude": "-81.8149807",
-        "latitude": "-81.8149807",
-        "elevation": 444,
-        "datetime": "2017-08-07T18:25:58Z"
-    },
-    {
-        "id": 2,
-        "product": {
-            "product_id": 1,
-            "description": "Cesna 122"
-        },
-        "longitude": "43.2583264",
-        "latitude": "-81.8149807",
-        "elevation": 500,
-        "datetime": "2016-10-12T17:00:00Z"
-    },
-    {
-        "id": 3,
-        "product": {
-            "product_id": 1,
-            "description": "Cesna 122"
-        },
-        "longitude": "42.5591120",
-        "latitude": "-79.2866930",
-        "elevation": 550,
-        "datetime": "2016-10-13T17:00:00Z"
-    }
-]
+import { fetchLocations, selectLocationToEdit, updateLocation, createLocation } from '../actions/locationsActions';
 
-export default class LocationsView extends React.Component {
+const mapStateToProps = state => ({
+  locations: state.locations,
 
-  render() {
+});
+
+const mapDispatchToProps = dispatch => ({
+  selectToEdit: location => dispatch(selectLocationToEdit(location)),
+  fetchLocations: query => dispatch(fetchLocations(query)),
+  updateLocation: location => dispatch(updateLocation(location)),
+  createLocation: location => dispatch(createLocation(location))
+});
+
+export class LocationsViewContainer extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleUpdate = this.handleUpdate.bind(this);
+    this.handleCreate = this.handleCreate.bind(this);
+  }
+
+  componentDidMount () {
+
+    let product_id = this.props.match.params.product_id
+    this.props.fetchLocations({product_id});
+  }
+
+  handleCreate(newLocation) {
+    let {
+      createLocation,
+      fetchLocations
+    } = this.props;
+
+    const product_id = this.props.match.params.product_id;
+
+    newLocation.product = product_id;
+
+    return createLocation(newLocation)
+      .then ( () => {
+        fetchLocations({ product_id })
+      });
+  }
+
+  handleUpdate(location) {
+    let {
+      updateLocation,
+      fetchLocations
+    } = this.props;
+
+    return updateLocation(location)
+      .then ( ()=> {
+        fetchLocations(this.props.match.params)
+      })
+  }
+
+  render () {
+    let {
+      selectToEdit
+    } = this.props;
+
+
+    let {
+      locations,
+      locationToEdit
+    } = this.props.locations;
+
     return (
       <div className="view--locations">
       	<Link to='/'>Go Back</Link>
         <h2>locations</h2>
           <div>
-            <LocationList locations={DEMO_LOCATIONS} />
+            <LocationList locations={locations} selectLocationToEdit={selectToEdit} />
             <h3>ADD</h3>
-            <LocationAdd />
+            <LocationAdd createLocation={this.handleCreate}/>
             <h3>EDIT</h3>
-            <LocationEdit />
+            <LocationEdit 
+              updateLocation={this.handleUpdate}
+              location={locationToEdit}/>
           </div>
       </div>
     );
   }
 }
+
+export default connect(mapStateToProps, mapDispatchToProps) (LocationsViewContainer)
+
+

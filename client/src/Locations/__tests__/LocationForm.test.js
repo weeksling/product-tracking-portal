@@ -4,6 +4,7 @@ import { shallow, mount, render } from 'enzyme'
 
 import LocationForm from '../LocationForm';
 
+import * as fixtures from '../../fixtures';
 
 describe('Location Form component', () => {
 
@@ -11,13 +12,6 @@ describe('Location Form component', () => {
 		save: function () {
 			return
 		}
-	}
-
-	const sampleEntry = {
-		datetime: '2017-08-09',
-		latitude: -47.9992,
-		longitude: -44.111,
-		elevation: 460
 	}
 
 	it('Mounts without crashing', () => {
@@ -35,9 +29,13 @@ describe('Location Form component', () => {
 	})
 
 	it('Sets state.formValue to the provided existingLocation prop (if included)', () => {
+		const {
+			mockOneLocation: location
+		} = fixtures
+
 		expect(
-			mount(<LocationForm {...minProps} existingLocation={sampleEntry} /> ).state('formValue')
-		).toEqual(sampleEntry)
+			mount(<LocationForm {...minProps} existingLocation={location} /> ).state('formValue')
+		).toEqual(location)
 	})
 
 	it('Calls this.props.save() when the "save" button is clicked', () => {
@@ -46,10 +44,10 @@ describe('Location Form component', () => {
 		const form = mount(<LocationForm save={saveMock} />)
 
 		form.setState({
-			formValue: sampleEntry
+			formValue: fixtures.mockOneLocation
 		})
 		form.find('button').simulate('click')
 
-		expect(saveMock).toHaveBeenCalledWith(sampleEntry);
+		expect(saveMock).toHaveBeenCalledWith(fixtures.mockOneLocation);
 	})
 })

@@ -1,0 +1,105 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProductList Snapshots It renders properly with 3 products 1`] = `
+<div>
+  <table>
+    <thead>
+      <th>
+        Id
+      </th>
+      <th>
+        Description
+      </th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          1
+        </td>
+        <td>
+          Cesna 400
+        </td>
+        <td>
+          <button
+            onClick={[Function]}
+          >
+            edit
+          </button>
+        </td>
+        <td>
+          <button>
+            <a
+              href="/1"
+              onClick={[Function]}
+            >
+              Track Locations
+            </a>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          2
+        </td>
+        <td>
+          DC-6 Twin Beaver   sdss
+        </td>
+        <td>
+          <button
+            onClick={[Function]}
+          >
+            edit
+          </button>
+        </td>
+        <td>
+          <button>
+            <a
+              href="/2"
+              onClick={[Function]}
+            >
+              Track Locations
+            </a>
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          3
+        </td>
+        <td>
+          Piper M602
+        </td>
+        <td>
+          <button
+            onClick={[Function]}
+          >
+            edit
+          </button>
+        </td>
+        <td>
+          <button>
+            <a
+              href="/3"
+              onClick={[Function]}
+            >
+              Track Locations
+            </a>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+`;
+
+exports[`ProductList Snapshots It renders properly with error 1`] = `
+<p>
+  There's been an error
+</p>
+`;
+
+exports[`ProductList Snapshots It renders properly with loading===true 1`] = `
+<p>
+  Loading...
+</p>
+`;

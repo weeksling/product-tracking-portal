@@ -1,8 +1,6 @@
 import reducer from '../productsReducer';
 import * as types from '../../actions/ActionTypes';
 
-import { createStore } from 'redux';
-
 const initialState = {
 	loading: false,
 	error: null,

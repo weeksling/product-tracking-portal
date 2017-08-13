@@ -34,7 +34,7 @@ router.register(r'products', ProductViewSet)
 
 
 class LocationSerializer(serializers.HyperlinkedModelSerializer):
-	product = ProductSerializer()
+	product = serializers.PrimaryKeyRelatedField(queryset=Product.objects.all())
 
 	class Meta:
 		model = Location

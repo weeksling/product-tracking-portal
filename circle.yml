@@ -26,7 +26,6 @@ dependencies:
 test:
   override:
     - cd client && npm run test
-    - cd server && python manage.py test
 
 ## Customize deployment commands
 deployment:
