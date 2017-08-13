@@ -26,9 +26,12 @@ describe('Locations View', () => {
 
 		let props = {
 			locations: mockLocations,
-			fetchLocations: fetchSpy
+			fetchLocations: fetchSpy,
+			match: {
+				params: {product_id:2}
+			}
 		}
-		expect(mount(<Router><LocationsView {...props} /></Router>).find('.view--locations').length).toBe(1);
+		expect(mount(<Router><LocationsView {...props}  /></Router>).find('.view--locations').length).toBe(1);
 
 		expect(fetchSpy).toHaveBeenCalled();
 	});

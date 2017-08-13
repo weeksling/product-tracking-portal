@@ -6,7 +6,7 @@ export default class LocationAdd extends Component {
 	render() {
 		return (
 			<div className="location-add">
-				<LocationForm save={ () => {} } />
+				<LocationForm save={ this.props.createLocation } />
 			</div>
 		)
 	}

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import { LocationList, LocationAdd, LocationEdit } from "../Locations";
 
-import { fetchLocations, selectLocationToEdit, updateLocation } from '../actions/locationsActions';
+import { fetchLocations, selectLocationToEdit, updateLocation, createLocation } from '../actions/locationsActions';
 
 const mapStateToProps = state => ({
   locations: state.locations,
@@ -13,18 +13,38 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   selectToEdit: location => dispatch(selectLocationToEdit(location)),
-  fetchLocations: () => dispatch(fetchLocations()),
-  updateLocation: location => dispatch(updateLocation(location))
+  fetchLocations: query => dispatch(fetchLocations(query)),
+  updateLocation: location => dispatch(updateLocation(location)),
+  createLocation: location => dispatch(createLocation(location))
 });
 
 export class LocationsViewContainer extends React.Component {
   constructor(props) {
     super(props)
     this.handleUpdate = this.handleUpdate.bind(this);
+    this.handleCreate = this.handleCreate.bind(this);
   }
 
   componentDidMount () {
-    this.props.fetchLocations();
+
+    let product_id = this.props.match.params.product_id
+    this.props.fetchLocations({product_id});
+  }
+
+  handleCreate(newLocation) {
+    let {
+      createLocation,
+      fetchLocations
+    } = this.props;
+
+    const product_id = this.props.match.params.product_id;
+
+    newLocation.product = product_id;
+
+    return createLocation(newLocation)
+      .then ( () => {
+        fetchLocations({ product_id })
+      });
   }
 
   handleUpdate(location) {
@@ -34,8 +54,8 @@ export class LocationsViewContainer extends React.Component {
     } = this.props;
 
     return updateLocation(location)
-      .then ( () => {
-        return fetchLocations()
+      .then ( ()=> {
+        fetchLocations(this.props.match.params)
       })
   }
 
@@ -43,6 +63,7 @@ export class LocationsViewContainer extends React.Component {
     let {
       selectToEdit
     } = this.props;
+
 
     let {
       locations,
@@ -56,7 +77,7 @@ export class LocationsViewContainer extends React.Component {
           <div>
             <LocationList locations={locations} selectLocationToEdit={selectToEdit} />
             <h3>ADD</h3>
-            <LocationAdd />
+            <LocationAdd createLocation={this.handleCreate}/>
             <h3>EDIT</h3>
             <LocationEdit 
               updateLocation={this.handleUpdate}
