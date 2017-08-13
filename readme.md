@@ -3,7 +3,7 @@ This project is a simple product tracking system to allow users to record packag
 
 ## Requirements
   - Python 2.7
-  - Node 4.6.1
+  - Node 8.2.1
 
 ## Getting Started
 
