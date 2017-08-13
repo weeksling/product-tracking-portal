@@ -88,6 +88,32 @@ describe('Locations Actions', () => {
 			})
 
 		})
+	})
 
+
+	describe('.selectLocationToEdit', () => {
+		it ('exists', () => {
+			expect(locations.selectLocationToEdit).toBeDefined();
+		})
+
+		it ('Dispatches SELECT_LOCATION_TO_EDIT', () => {
+			let {
+				mockOneLocation: location
+			} = fixtures;
+
+			const store = mockStore();
+
+			const expectedActions = [
+				{
+					type: types.SELECT_LOCATION_TO_EDIT,
+					payload: location
+				}
+			]
+
+			store.dispatch(locations.selectLocationToEdit(location))
+			expect(store.getActions()).toEqual(expectedActions)
+		})
 	})
 })
+
+

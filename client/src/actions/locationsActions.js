@@ -17,3 +17,11 @@ export const fetchLocations = (product) => {
 			});
 	}
 }
+
+export const selectLocationToEdit = (location) => {
+	return {
+		type: ActionTypes.SELECT_LOCATION_TO_EDIT,
+		payload: location
+	}
+}
+
