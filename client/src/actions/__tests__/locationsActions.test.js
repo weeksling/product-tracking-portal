@@ -12,7 +12,7 @@ import * as fixtures from '../../fixtures';
 import nock from 'nock';
 
 import * as locations from '../locationsActions';
-import * as types from '../ActionTypes';
+import * as ActionTypes from '../ActionTypes';
 
 const middleWares = [promises(), thunk];
 const mockStore = configureMockStore(middleWares);
@@ -36,8 +36,8 @@ describe('Locations Actions', () => {
 						mockLocations, {'Access-Control-Allow-Origin': '*'})
 
 				const expectedActions = [
-					{type: types.FETCH_LOCATIONS_REQUEST, payload: undefined},
-					{type: types.FETCH_LOCATIONS_SUCCESS, payload: mockLocations}
+					{type: ActionTypes.FETCH_LOCATIONS_REQUEST, payload: undefined},
+					{type: ActionTypes.FETCH_LOCATIONS_SUCCESS, payload: mockLocations}
 				]
 
 				const store = mockStore()
@@ -69,11 +69,11 @@ describe('Locations Actions', () => {
 
 				const expectedActions = [
 					{
-						type: types.FETCH_LOCATIONS_REQUEST,
+						type: ActionTypes.FETCH_LOCATIONS_REQUEST,
 						payload: product
 					},
 					{
-						type: types.FETCH_LOCATIONS_SUCCESS,
+						type: ActionTypes.FETCH_LOCATIONS_SUCCESS,
 						payload: mockLocations
 					}
 				]
@@ -105,7 +105,7 @@ describe('Locations Actions', () => {
 
 			const expectedActions = [
 				{
-					type: types.SELECT_LOCATION_TO_EDIT,
+					type: ActionTypes.SELECT_LOCATION_TO_EDIT,
 					payload: location
 				}
 			]
@@ -130,8 +130,8 @@ describe('Locations Actions', () => {
 				.reply(200);
 
 			let expectedActions = [
-				{type: types.UPDATE_LOCATION, payload:{...mockLocation, elevation: 10}},
-				{type: types.UPDATE_LOCATION_SUCCESS}
+				{type: ActionTypes.UPDATE_LOCATION, payload:{...mockLocation, elevation: 10}},
+				{type: ActionTypes.UPDATE_LOCATION_SUCCESS}
 			]
 
 
@@ -156,8 +156,8 @@ describe('Locations Actions', () => {
 				.reply(400, expectedError);
 
 			let expectedActions = [
-				{type: types.UPDATE_LOCATION, payload:{...mockLocation, elevation: 10}},
-				{type: types.UPDATE_LOCATION_ERROR, payload: expectedError}
+				{type: ActionTypes.UPDATE_LOCATION, payload:{...mockLocation, elevation: 10}},
+				{type: ActionTypes.UPDATE_LOCATION_ERROR, payload: expectedError}
 			]
 
 			const store = mockStore();
@@ -172,6 +172,51 @@ describe('Locations Actions', () => {
 
 		})
 
+	})
+
+	describe('.createLocation', () => {
+		it('exists', () => {
+			expect(locations.createLocation).toBeDefined();
+		})
+
+		it ('Dispatches actions: CREATE_LOCATION, CREATE_LOCATION_SUCCESS', () => {
+			const {
+				mockOneLocation:location
+			} = fixtures;
+
+			const expectedRequests = nock('http://localhost:8000')
+				.post('/api/locations/', location)
+				.reply(200);
+				
+			let expectedActions = [
+				{type: ActionTypes.CREATE_LOCATION, payload: location},
+				{type: ActionTypes.CREATE_LOCATION_SUCCESS, payload: location}
+			]
+
+			const store = mockStore();
+
+			return store.dispatch(locations.createLocation(location))
+				.then ( () => {
+					expect(store.getActions()).toEqual(expectedActions)
+				});
+		})
+
+		it ("sends a POST request to API Locations endpoint", () => {
+			const {
+				mockOneLocation: location
+			} = fixtures;
+
+			const expectedRequests = nock('http://localhost:8000')
+				.post('/api/locations/', location)
+				.reply(200);
+
+			const store = mockStore()
+
+			return store.dispatch(locations.createLocation(location))
+				.then ( () => {
+					expectedRequests.done()
+				})
+		})
 	})
 })
 

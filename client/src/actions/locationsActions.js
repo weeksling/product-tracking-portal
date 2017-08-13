@@ -43,3 +43,15 @@ export const updateLocation = (location) => {
 			})
 	}
 }
+
+export const createLocation = (location) => {
+	return dispatch => {
+		dispatch({ type: ActionTypes.CREATE_LOCATION, payload: location })
+
+		return axios.post('http://localhost:8000/api/locations/', location)
+			.then ( () => {
+				dispatch({ type: ActionTypes.CREATE_LOCATION_SUCCESS, payload: location })
+			})
+	}
+}
+
