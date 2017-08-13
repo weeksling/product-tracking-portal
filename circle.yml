@@ -25,8 +25,8 @@ dependencies:
 ## Customize test commands
 test:
   override:
-    - cd ~/client && npm run test
-    - cd ~/server && python manage.py test
+    - cd client && npm run test
+    - cd server && python manage.py test
 
 ## Customize deployment commands
 deployment:
