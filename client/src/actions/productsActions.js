@@ -3,7 +3,9 @@ import * as types from './ActionTypes';
 import axios from 'axios'
 
 export function fetchProducts (data) {
+	console.log('fetchProducts called')
 	return dispatch => {
+		console.log('Fetching Products')
 		dispatch(productsRequest())
 		return axios.get('http://localhost:8000/api/products/')
 			.then(function (response) {

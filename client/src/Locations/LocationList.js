@@ -24,7 +24,8 @@ export default class LocationList extends Component {
 	render () {
 
 		let {
-			locations
+			locations,
+			selectLocationToEdit
 		} = this.props;
 
 		return (
@@ -38,7 +39,7 @@ export default class LocationList extends Component {
 						<th>EDIT</th>
 					</thead>
 					<tbody>
-					{ locations ? locations.map( (location, index) => <Location location={location} key={index} /> ) : undefined }
+					{ locations ? locations.map( (location, index) => <Location location={location} key={index} selectLocationToEdit/> ) : undefined }
 					</tbody>
 				</table>
 			</div>
