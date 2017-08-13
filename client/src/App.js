@@ -19,7 +19,8 @@ class App extends Component {
         <Provider store={store}>
           <Router>
             <div>
-              <Route exact path="/" component={LocationsView}/>
+              <Route exact path="/" component={ProductsView}/>
+              <Route exact path="/:product_id" component={LocationsView}/>
             </div>
           </Router>
         </Provider>

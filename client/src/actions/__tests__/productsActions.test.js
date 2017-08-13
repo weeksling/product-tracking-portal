@@ -133,6 +133,10 @@ describe( 'productsActions', () => {
 				.put('/api/products/'+mockProduct.product_id+'/', { ...mockProduct, description: 'something' })
 				.reply(200)
 
+			nock('http://localhost:8000')
+				.get('/api/products/')
+				.reply(200)
+
 			const store = mockStore();
 
 			return store.dispatch(products.updateProduct({ ...mockProduct, description:'something' } ))

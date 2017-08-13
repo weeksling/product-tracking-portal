@@ -21,7 +21,7 @@ export class Product extends Component {
 				<td>{product.product_id}</td>
 				<td>{product.description}</td>
 				<td><button onClick={ e => { selectToEdit(product) } }>edit</button></td>
-				<td><button><Link to={"/locations/"+product.product_id}>Track Locations</Link></button></td>
+				<td><button><Link to={"/"+product.product_id}>Track Locations</Link></button></td>
 			</tr>
 		)
 	}
