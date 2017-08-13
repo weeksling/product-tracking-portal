@@ -1,7 +1,5 @@
 import * as ActionTypes from './ActionTypes';
 
-import moment from 'moment';
-
 import axios from 'axios';
 
 export const fetchLocations = (product) => {
