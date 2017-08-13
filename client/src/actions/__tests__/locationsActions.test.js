@@ -114,6 +114,67 @@ describe('Locations Actions', () => {
 			expect(store.getActions()).toEqual(expectedActions)
 		})
 	})
+
+	describe('.updateLocation', () => {
+		it ('exists', () => {
+			expect(locations.updateLocation).toBeDefined();
+		})
+
+		it ('Dispatches an UPDATE_LOCATION, UPDATE_LOCATION_SUCCESS, then FETCH_LOCATIONS', () => {
+			const {
+				mockOneLocation: mockLocation
+			} = fixtures
+
+			let expectedRequests = nock('http://localhost:8000')
+				.put('/api/locations/'+mockLocation.id+'/', {...mockLocation, elevation: 10})
+				.reply(200);
+
+			let expectedActions = [
+				{type: types.UPDATE_LOCATION, payload:{...mockLocation, elevation: 10}},
+				{type: types.UPDATE_LOCATION_SUCCESS}
+			]
+
+
+			const store = mockStore();
+
+			return store.dispatch(locations.updateLocation({...mockLocation, elevation: 10}))
+				.then( () => {
+					expect(store.getActions()).toEqual(expectedActions)
+					expectedRequests.done()
+				})
+		})
+
+		it ('Fails, and dispatches an UPDATE_LOCATION_ERROR', () => {
+			const {
+				mockOneLocation: mockLocation
+			} = fixtures
+
+			let expectedError = new Error("Request failed with status code 400");
+
+			let expectedRequests = nock('http://localhost:8000')
+				.put('/api/locations/'+mockLocation.id+'/', {...mockLocation, elevation: 10})
+				.reply(400, expectedError);
+
+			let expectedActions = [
+				{type: types.UPDATE_LOCATION, payload:{...mockLocation, elevation: 10}},
+				{type: types.UPDATE_LOCATION_ERROR, payload: expectedError}
+			]
+
+			const store = mockStore();
+
+			return store.dispatch(locations.updateLocation({...mockLocation, elevation:10}))
+				.then(() => {
+					throw Error('Should have failed')
+				})
+				.catch( () => {
+					expect(store.getActions()).toEqual(expectedActions)
+				})
+
+		})
+
+	})
 })
+
+
 
 

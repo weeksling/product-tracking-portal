@@ -21,7 +21,6 @@ export default class ProductForm extends Component {
 	}
 
 	componentWillReceiveProps (nextProps) {
-		console.log({nextProps})
 		if (nextProps.existingProduct) {
 			this.setState({ formValue: nextProps.existingProduct })
 		} 

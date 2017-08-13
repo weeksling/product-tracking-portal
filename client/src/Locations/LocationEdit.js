@@ -7,7 +7,7 @@ export default class LocationEdit extends Component {
 	render() {
 		return (
 			<div className="location-edit">
-				<LocationForm existingLocation={this.props.location}/>
+				<LocationForm save={this.props.updateLocation} existingLocation={this.props.location}/>
 			</div>
 		)
 	}

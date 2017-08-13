@@ -1,5 +1,7 @@
 import * as ActionTypes from './ActionTypes';
 
+import moment from 'moment';
+
 import axios from 'axios';
 
 export const fetchLocations = (product) => {
@@ -14,7 +16,7 @@ export const fetchLocations = (product) => {
 		return axios.get(request_url)
 			.then( (response) => {
 				dispatch({type: ActionTypes.FETCH_LOCATIONS_SUCCESS, payload: response.data})
-			});
+			})
 	}
 }
 
@@ -25,3 +27,21 @@ export const selectLocationToEdit = (location) => {
 	}
 }
 
+export const updateLocation = (location) => {
+	return dispatch => {
+		let update = {
+			...location,
+			longitude: parseFloat(location.longitude),
+			latitude: parseFloat(location.latitude)
+		}
+
+		dispatch({ type: ActionTypes.UPDATE_LOCATION, payload: {...location} })
+
+		return axios.put('http://localhost:8000/api/locations/'+location.id+'/', {...location})
+			.then ( (response) => {
+				dispatch({type: ActionTypes.UPDATE_LOCATION_SUCCESS})
+			}, (err) => {
+				dispatch({ type: ActionTypes.UPDATE_LOCATION_ERROR, payload: err })
+			})
+	}
+}

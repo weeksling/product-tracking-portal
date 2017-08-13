@@ -4,7 +4,7 @@ import t from 'tcomb-form';
 import PropTypes from 'prop-types';
 
 const LocationSchema = t.struct({
-	datetime: t.Date,
+	datetime: t.String,
 	longitude: t.Number,
 	latitude: t.Number,
 	elevation: t.Number
@@ -29,11 +29,18 @@ export default class LocationForm extends Component {
 		}
 	}
 
-	/*componentWillReceiveProps(nextProps) {
-		if (nextProps.existingLocation) {
+	componentWillReceiveProps(nextProps) {
+		let {
+			existingLocation
+		} = nextProps;
+
+		if (existingLocation) {
 			this.setState({ formValue: existingLocation })
 		}
-	}*/
+		else if (this.props.existingLocation) {
+			this.setState({ formValue: null })
+		}
+	}
 
 	handleChange(formValue) {
 		this.setState({ formValue });
@@ -46,7 +53,7 @@ export default class LocationForm extends Component {
 	}
 
 	render() {
-
+		console.log(this.state)
 		let {
 			formValue
 		} = this.state;

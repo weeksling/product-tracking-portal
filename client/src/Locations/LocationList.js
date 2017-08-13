@@ -32,14 +32,20 @@ export default class LocationList extends Component {
 			<div className="location-list">
 				<table>
 					<thead>
-						<th>DATE/TIME</th>
-						<th>LONGITUDE</th>
-						<th>LATITUDE</th>
-						<th>ELEVATION</th>
-						<th>EDIT</th>
+						<tr>
+							<th>DATE/TIME</th>
+							<th>LONGITUDE</th>
+							<th>LATITUDE</th>
+							<th>ELEVATION</th>
+							<th>EDIT</th>
+						</tr>
 					</thead>
 					<tbody>
-					{ locations ? locations.map( (location, index) => <Location location={location} key={index} selectLocationToEdit/> ) : undefined }
+					{ locations ? locations.map( (location, index) => 
+						(<Location 
+							location={location} 
+							key={index} 
+							selectLocationToEdit={selectLocationToEdit}/>))  : undefined }
 					</tbody>
 				</table>
 			</div>
